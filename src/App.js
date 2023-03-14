@@ -1,23 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import { lazy, Suspense } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import Skeleton from 'components/Skeleton';
+
+const HomePage = lazy(() => import('pages/HomePage'));
+const CoursePage = lazy(() => import('pages/CoursePage'));
+const NotFoundPage = lazy(() => import('pages/NotFoundPage'));
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Suspense fallback={<Skeleton />}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/course" element={<CoursePage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </Suspense>
     </div>
   );
 }
