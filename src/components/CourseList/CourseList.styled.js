@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import Marker from '../../assets/marker.png';
 import { breakpoints } from 'services/mixins';
 
@@ -159,4 +160,8 @@ export const SkillItemText = styled.p`
   @media ${breakpoints.desktop} {
     font-size: ${props => props.theme.fontSizes.l};
   }
+`;
+
+export const StyledLink = styled(Link)`
+  text-decoration: none;
 `;

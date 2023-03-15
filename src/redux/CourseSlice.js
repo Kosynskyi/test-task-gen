@@ -11,7 +11,10 @@ export const courseApi = createApi({
     getAllCourses: builder.query({
       query: () => `/core/preview-courses`,
     }),
+    getCourseDetails: builder.query({
+      query: courseId => `/core/preview-courses/${courseId}`,
+    }),
   }),
 });
 
-export const { useGetAllCoursesQuery } = courseApi;
+export const { useGetAllCoursesQuery, useGetCourseDetailsQuery } = courseApi;

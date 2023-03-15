@@ -13,7 +13,7 @@ function App() {
       <Suspense fallback={<Skeleton />}>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/course" element={<CoursePage />} />
+          <Route path="/course/:courseId" element={<CoursePage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
