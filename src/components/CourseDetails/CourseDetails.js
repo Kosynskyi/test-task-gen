@@ -13,16 +13,17 @@ const CourseDetails = () => {
 
   const videoJsOptions = {
     // autoplay: true,
-    width: '750',
+    width: '640',
     heigth: '500',
     controls: true,
     responsive: true,
-    poster:
-      'https://wisey.app/assets/images/web/course-covers/cognitive-animation/cover.webp',
+    // poster:
+    //   'https://wisey.app/assets/images/web/lessons-covers/rational-decisions/lesson-3.webp',
+    poster: 'https://wisey.app/assets/images/web/common/lesson-3.webp',
     fluid: true,
     sources: [
       {
-        src: 'https://wisey.app/videos/lack-of-motivation-how-to-overcome-it/preview/AppleHLS1/preview.m3u8',
+        src: 'https://wisey.app/videos/cognitive-video/lesson-4/AppleHLS1/lesson-4.m3u8',
         type: 'application/x-mpegURL',
       },
     ],
@@ -59,7 +60,7 @@ const CourseDetails = () => {
     // meta,
   } = data;
 
-  console.log(lessons[0].previewImageLink + '/cover.webp');
+  console.log(lessons[0].previewImageLink + '/' + lessons[1].order + '.webp');
   return (
     <Box>
       <Box>
