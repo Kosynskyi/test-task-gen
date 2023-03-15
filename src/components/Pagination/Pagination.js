@@ -3,6 +3,7 @@ import { ITEM_PER_PAGE } from 'helpers/constants';
 import { useGetAllCoursesQuery } from 'redux/CourseSlice';
 import Skeleton from 'components/Skeleton';
 import CourseList from 'components/CourseList';
+import Error from 'components/Error';
 import { PaginateList, ButtonNext, ButtonPrev } from './Pagination.styled';
 
 const Pagination = () => {
@@ -12,7 +13,7 @@ const Pagination = () => {
   );
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
-  const { data, isLoading } = useGetAllCoursesQuery();
+  const { data, isLoading, error } = useGetAllCoursesQuery();
   const totalCourses = data?.courses.length;
 
   useEffect(() => {
@@ -31,6 +32,7 @@ const Pagination = () => {
 
   return (
     <>
+      {error && <Error />}
       {isLoading ? (
         <Skeleton />
       ) : (

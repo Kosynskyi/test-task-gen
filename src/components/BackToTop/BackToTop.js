@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { MdArrowUpward } from 'react-icons/md';
 
+import { BackToTopButton } from './BackToTop.styled';
+
 const BackToTop = () => {
   const [backToTop, setBackToTop] = useState(false);
 
@@ -24,9 +26,9 @@ const BackToTop = () => {
   return (
     <>
       {backToTop && (
-        <button onClick={scrollToTop}>
+        <BackToTopButton onClick={scrollToTop}>
           <MdArrowUpward color="#57b846" size={25} />
-        </button>
+        </BackToTopButton>
       )}
     </>
   );

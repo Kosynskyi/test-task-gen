@@ -3,16 +3,10 @@ export const theme = {
     primary: 'rgba(0, 0, 0, 0.87)',
     secondary: 'rgba(0, 0, 0, 0.6)',
     icon: 'rgba(0, 0, 0, 0.54)',
-    primaryBorder: 'rgba(0, 0, 0, 0.5)',
-    backgroundImage: 'rgba(196, 196, 196, 1)',
     white: 'rgba(255, 255, 255, 1)',
     black: 'rgba(0, 0, 0, 1)',
-    gray: 'rgba(142, 142, 147, 1)',
-    divider: 'rgba(33, 33, 33, 0.08)',
-    subtext: 'rgba(110, 121, 140, 1)',
-    title: 'rgba(8, 31, 50, 1)',
-    borderImageDetails: 'rgba(242, 242, 247, 1)',
-    buttonSignIn: 'rgb(0, 176, 200)',
+    quantity: '#57b846',
+    active: 'rgb(0, 176, 200)',
   },
   space: ['auto', 0, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48],
   fonts: {
@@ -35,8 +29,6 @@ export const theme = {
   },
   lineHeights: {
     primary: 1.5,
-    extra: 1.43,
-    additional: 1.2,
     secondary: 1.17,
   },
   letterSpacing: {

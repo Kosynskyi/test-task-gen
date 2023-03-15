@@ -1,7 +1,22 @@
+import { Box } from 'utils/Box';
+import {
+  StyledCourseList,
+  StyledCourseItem,
+  CourseTitle,
+  Description,
+  Image,
+  Subtext,
+  Quantity,
+  Subtitle,
+  SkillList,
+  SkillItem,
+  SkillItemText,
+} from './CourseList.styled';
+
 const CourseList = ({ currentItems }) => {
   return (
-    <>
-      <ul>
+    <Box mb={5}>
+      <StyledCourseList>
         {currentItems?.map(
           ({
             id,
@@ -12,29 +27,33 @@ const CourseList = ({ currentItems }) => {
             rating,
             meta,
           }) => (
-            <li key={id}>
-              <h2>{title}</h2>
-              <p>{description}</p>
-              <img
+            <StyledCourseItem key={id}>
+              <CourseTitle>{title}</CourseTitle>
+              <Description>{description}</Description>
+              <Image
                 src={previewImageLink + '/cover.webp'}
                 alt={title}
                 width="320px"
               />
-              <p>Lessons count: {lessonsCount}</p>
-              <p>Rating: {rating}</p>
-              <h3>Skills</h3>
-              <ul>
+              <Subtext>
+                Lessons count: <Quantity>{lessonsCount}</Quantity>
+              </Subtext>
+              <Subtext>
+                Rating: <Quantity>{rating}</Quantity>
+              </Subtext>
+              <Subtitle>Skills</Subtitle>
+              <SkillList>
                 {meta?.skills?.map(item => (
-                  <li key={id + '_' + item}>
-                    <p>{item}</p>
-                  </li>
+                  <SkillItem key={id + '_' + item}>
+                    <SkillItemText>{item}</SkillItemText>
+                  </SkillItem>
                 ))}
-              </ul>
-            </li>
+              </SkillList>
+            </StyledCourseItem>
           )
         )}
-      </ul>
-    </>
+      </StyledCourseList>
+    </Box>
   );
 };
 

@@ -26,7 +26,7 @@ export const PaginateList = styled(ReactPaginate)`
 
     & > [aria-current] {
       font-size: ${props => props.theme.fontSizes.xxl};
-      color: ${props => props.theme.colors.buttonSignIn};
+      color: ${props => props.theme.colors.active};
     }
   }
 `;
