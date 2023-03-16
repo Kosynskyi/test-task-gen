@@ -23,12 +23,3 @@ function App() {
 }
 
 export default App;
-//	https://wisey.app/assets/images/web/course-covers/toxic-people=======/cover.webp
-// Щоб показати зображення:
-
-// - для курсу: `previewImageLink + '/cover.webp'`
-// - для уроку: `previewImageLink + '/' + lesson.order + '.webp'`
-
-// В реалізації використовувати стандартний відеоплеєр.
-
-// https://wisey.app/assets/images/web/course-covers/toxic-people/cover.webp

@@ -3,31 +3,37 @@ import { useParams } from 'react-router-dom';
 import VideoJS from 'components/VideoJS/VideoJS';
 import { useGetCourseDetailsQuery } from 'redux/CourseSlice';
 import { Box } from 'utils/Box';
+import { normalizedDuration, lockedDuration } from 'helpers/helpFunctions';
+import {
+  Wrapper,
+  ImageWrapper,
+  CourseTitle,
+  Description,
+  CourseDuration,
+  Quantity,
+  NotAvailableLessons,
+  Subtitle,
+  LessonTitle,
+} from './CourseDetails.styled';
 
 const CourseDetails = () => {
   const [course, setCourse] = useState(null);
   const { courseId } = useParams();
   const playerRef = useRef(null);
-
   const { data } = useGetCourseDetailsQuery(courseId);
 
-  const videoJsOptions = {
-    // autoplay: true,
-    width: '640',
-    heigth: '500',
-    controls: true,
-    responsive: true,
-    // poster:
-    //   'https://wisey.app/assets/images/web/lessons-covers/rational-decisions/lesson-3.webp',
-    poster: 'https://wisey.app/assets/images/web/common/lesson-3.webp',
-    fluid: true,
-    sources: [
-      {
-        src: 'https://wisey.app/videos/cognitive-video/lesson-4/AppleHLS1/lesson-4.m3u8',
-        type: 'application/x-mpegURL',
-      },
-    ],
-  };
+  useEffect(() => {
+    if (!data) return;
+    setCourse(data);
+  }, [data]);
+
+  if (course) {
+    const poster1 = document.querySelector('.vjs-poster img');
+    poster1.style.objectFit = 'cover';
+  }
+  // const handleHotkeys = event => {
+  //   console.log(event);
+  // };
 
   const handlePlayerReady = player => {
     playerRef.current = player;
@@ -42,32 +48,88 @@ const CourseDetails = () => {
     });
   };
 
-  useEffect(() => {
-    setCourse(data);
-  }, [data]);
-
-  console.log('data', data);
-
   if (!data) return;
 
   const {
     title,
     description,
     lessons,
-    // rating,
+    previewImageLink,
+    duration,
+    rating,
     // status,
-    // containsLockedLessons,
+    containsLockedLessons,
     // meta,
   } = data;
 
-  console.log(lessons[0].previewImageLink + '/' + lessons[1].order + '.webp');
+  const poster =
+    lessons[0]?.previewImageLink + '/lesson-' + lessons[0]?.order + '.webp';
+
+  const src = lessons[0]?.link;
+
+  const videoJsOptions = {
+    // autoplay: true,
+    width: '640',
+    heigth: '500',
+    controls: true,
+    responsive: true,
+    poster,
+    fluid: true,
+    sources: [
+      {
+        src,
+        type: 'application/x-mpegURL',
+      },
+    ],
+  };
+
   return (
-    <Box>
+    <Box px={7} py={10}>
+      <Wrapper>
+        <ImageWrapper>
+          <img
+            src={previewImageLink + '/cover.webp'}
+            alt={title}
+            width="300px"
+          />
+        </ImageWrapper>
+        <Box>
+          <CourseTitle>{title}</CourseTitle>
+          <Description>{description}</Description>
+          <CourseDuration>
+            Available duration:
+            <Quantity>{normalizedDuration(duration)}</Quantity>
+          </CourseDuration>
+          {containsLockedLessons ? (
+            <CourseDuration>
+              Has locked lessons:{' '}
+              <NotAvailableLessons>
+                {normalizedDuration(lockedDuration(lessons))}
+              </NotAvailableLessons>
+            </CourseDuration>
+          ) : (
+            <CourseDuration>All lessons are available</CourseDuration>
+          )}
+          <CourseDuration>
+            Rating: <Quantity>{rating}</Quantity>
+          </CourseDuration>
+        </Box>
+      </Wrapper>
+      <Subtitle>Lesson {lessons[0].order}</Subtitle>
+      <LessonTitle>{lessons[0].title}</LessonTitle>
       <Box>
         <VideoJS options={videoJsOptions} onReady={handlePlayerReady} />
       </Box>
-      <h2>{title}</h2>
-      <p>{description}</p>
+
+      {/* <video
+        src="https://www.youtube.com/watch?v=eVKm12T0BPg"
+        type="application/x-mpegURL"
+        width="480"
+        controls
+        poster={poster}
+      >
+        <sourse  />
+      </video> */}
       {/* <ul>
         {lessons.map(({ id, previewImageLink, status, title, order }) => (
           <li key={id}>
@@ -76,6 +138,7 @@ const CourseDetails = () => {
           </li>
         ))}
       </ul> */}
+      <button type="button">Load more</button>
     </Box>
   );
 };
