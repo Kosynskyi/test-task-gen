@@ -7,12 +7,9 @@ export const theme = {
     black: 'rgba(0, 0, 0, 1)',
     quantity: '#57b846',
     active: 'rgb(0, 176, 200)',
+    button: 'rgb(0, 176, 200)',
   },
   space: ['auto', 0, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48],
-  fonts: {
-    roboto: "'Roboto', sans-serif",
-    karla: "'Karla', sans-serif",
-  },
   fontSizes: {
     xs: '12px',
     s: '14px',

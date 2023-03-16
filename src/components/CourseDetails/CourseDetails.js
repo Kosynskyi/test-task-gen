@@ -3,7 +3,12 @@ import { useParams } from 'react-router-dom';
 import VideoJS from 'components/VideoJS/VideoJS';
 import { useGetCourseDetailsQuery } from 'redux/CourseSlice';
 import { Box } from 'utils/Box';
-import { normalizedDuration, lockedDuration } from 'helpers/helpFunctions';
+import {
+  normalizedDuration,
+  lockedDuration,
+  otherLessonFunc,
+} from 'helpers/helpFunctions';
+import { StyledButton } from 'components/Button/Button.styled';
 import {
   Wrapper,
   ImageWrapper,
@@ -21,6 +26,7 @@ const CourseDetails = () => {
   const { courseId } = useParams();
   const playerRef = useRef(null);
   const { data } = useGetCourseDetailsQuery(courseId);
+  const [otherLessons, setOtherLessons] = useState([]);
 
   useEffect(() => {
     if (!data) return;
@@ -48,6 +54,11 @@ const CourseDetails = () => {
     });
   };
 
+  const loadMore = () => {
+    console.log(333);
+    setOtherLessons(otherLessonFunc(data?.lessons));
+  };
+
   if (!data) return;
 
   const {
@@ -57,18 +68,15 @@ const CourseDetails = () => {
     previewImageLink,
     duration,
     rating,
-    // status,
     containsLockedLessons,
-    // meta,
   } = data;
 
+  console.log('otherLessons', otherLessons);
   const poster =
     lessons[0]?.previewImageLink + '/lesson-' + lessons[0]?.order + '.webp';
-
   const src = lessons[0]?.link;
 
   const videoJsOptions = {
-    // autoplay: true,
     width: '640',
     heigth: '500',
     controls: true,
@@ -84,7 +92,7 @@ const CourseDetails = () => {
   };
 
   return (
-    <Box px={7} py={10}>
+    <Box pb={7}>
       <Wrapper>
         <ImageWrapper>
           <img
@@ -138,7 +146,27 @@ const CourseDetails = () => {
           </li>
         ))}
       </ul> */}
-      <button type="button">Load more</button>
+
+      {otherLessons.length === 0 && (
+        <Box display="flex" justifyContent="center" mt={5}>
+          <StyledButton onClick={() => loadMore()}>
+            Load all lessons
+          </StyledButton>
+        </Box>
+      )}
+      {otherLessons.length > 0 && (
+        <ul>
+          {otherLessons.map(({ id, order, title }) => (
+            <li key={id}>
+              <Subtitle>Lesson {order}</Subtitle>
+              <LessonTitle>{title}</LessonTitle>
+              <Box>
+                <VideoJS options={videoJsOptions} onReady={handlePlayerReady} />
+              </Box>
+            </li>
+          ))}
+        </ul>
+      )}
     </Box>
   );
 };

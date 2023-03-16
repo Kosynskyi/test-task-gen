@@ -1,13 +1,25 @@
-import { lazy, Suspense } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Skeleton from 'components/Skeleton';
 import BackToTop from 'components/BackToTop';
+import { getToken } from 'services/api';
 
 const HomePage = lazy(() => import('pages/HomePage'));
 const CoursePage = lazy(() => import('pages/CoursePage'));
 const NotFoundPage = lazy(() => import('pages/NotFoundPage'));
 
 function App() {
+  const [token, setToken] = useState(localStorage.getItem('token'));
+
+  useEffect(() => {
+    if (!token) {
+      getToken().then(setToken);
+    } else {
+      return;
+    }
+  }, [token]);
+
+  localStorage.setItem('token', token);
   return (
     <>
       <Suspense fallback={<Skeleton />}>
