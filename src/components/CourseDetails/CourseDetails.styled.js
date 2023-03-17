@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { breakpoints } from 'services/mixins';
+import { FaLock, FaLockOpen } from 'react-icons/fa';
 
 export const Wrapper = styled.div`
   @media ${breakpoints.mobile} {
@@ -22,6 +23,7 @@ export const ImageWrapper = styled.div`
 
   @media ${breakpoints.desktop} {
     margin-bottom: ${props => props.theme.space[1]}px;
+    margin-right: ${props => props.theme.space[5]}px;
     width: 50%;
   }
 `;
@@ -119,4 +121,48 @@ export const LessonTitle = styled.p`
     margin-bottom: ${props => props.theme.space[3]}px;
     font-size: ${props => props.theme.fontSizes.xl};
   }
+`;
+
+export const StatusText = styled.p`
+  @media ${breakpoints.mobile} {
+    font-weight: ${props => props.theme.fontWeights.medium};
+    font-size: ${props => props.theme.fontSizes.l};
+    line-height: ${props => props.theme.lineHeights.secondary};
+    letter-spacing: ${props => props.theme.letterSpacing.secondary};
+    text-align: center;
+  }
+
+  @media ${breakpoints.desktop} {
+    font-size: ${props => props.theme.fontSizes.xl};
+  }
+`;
+
+export const ButtonArrow = styled.button`
+  @media ${breakpoints.mobile} {
+    padding: ${props => props.theme.space[4]}px;
+    border: ${props => props.theme.borders.none};
+    background-color: transparent;
+    cursor: pointer;
+    transition: 500ms;
+  }
+
+  @media ${breakpoints.desktop} {
+    &:hover {
+      transform: scale(1.5);
+    }
+  }
+`;
+
+export const IconLock = styled(FaLock, FaLockOpen)`
+  position: relative;
+  top: 3px;
+`;
+
+export const IconUnlock = styled(FaLockOpen)`
+  position: relative;
+  top: 3px;
+`;
+
+export const VideoWrapper = styled.div`
+  width: 1100px;
 `;

@@ -8,5 +8,3 @@ export const lockedDuration = arr =>
   arr
     .filter(({ status }) => status === 'locked')
     .reduce((acc, { duration }) => acc + duration, 0);
-
-export const otherLessonFunc = arr => [...arr.slice(1)];
