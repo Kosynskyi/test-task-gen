@@ -46,8 +46,9 @@ const CourseDetails = () => {
     playerRef.current = player;
 
     // You can handle player events here, for example:
-    player.on('waiting', () => {
+    player.on('waiting', e => {
       // videojs.log('player is waiting');
+      console.log(e);
     });
 
     player.on('dispose', () => {
@@ -66,8 +67,6 @@ const CourseDetails = () => {
     rating,
     containsLockedLessons,
   } = data;
-
-  // console.log('lessons', lessons);
 
   const handleChangeLesson = (lessons, idx) => {
     const poster =
@@ -96,80 +95,88 @@ const CourseDetails = () => {
 
   const nextLesson = (lessons, idx) => {
     setCurrentIndexVideo(prev =>
-      Number(idx) === Number(lessons.length - 1) ? 0 : prev + 1
+      Number(idx) === Number(lessons.length - 1) ? 0 : Number(prev) + 1
     );
   };
 
   const prevLesson = (lessons, idx) => {
     setCurrentIndexVideo(prev =>
-      Number(idx) === 0 ? lessons.length - 1 : prev - 1
+      Number(idx) === 0 ? lessons.length - 1 : Number(prev) - 1
     );
   };
 
   return (
     <Box pb={7}>
-      <Wrapper>
-        <ImageWrapper>
-          <img
-            src={previewImageLink + '/cover.webp'}
-            alt={title}
-            width="300px"
-          />
-        </ImageWrapper>
-        <Box>
-          <CourseTitle>{title}</CourseTitle>
-          <Description>{description}</Description>
-          <CourseDuration>
-            Available duration:{' '}
-            <Quantity>{normalizedDuration(duration)}</Quantity>
-          </CourseDuration>
-          {containsLockedLessons ? (
-            <CourseDuration>
-              Has locked lessons:{' '}
-              <NotAvailableLessons>
-                {normalizedDuration(lockedDuration(lessons))}
-              </NotAvailableLessons>
-            </CourseDuration>
-          ) : (
-            <CourseDuration>All lessons are available</CourseDuration>
-          )}
-          <CourseDuration>
-            Rating: <Quantity>{rating}</Quantity>
-          </CourseDuration>
-        </Box>
-      </Wrapper>
+      {lessons && (
+        <>
+          <Wrapper>
+            <ImageWrapper>
+              <img
+                src={previewImageLink + '/cover.webp'}
+                alt={title}
+                width="300px"
+              />
+            </ImageWrapper>
+            <Box>
+              <CourseTitle>{title}</CourseTitle>
+              <Description>{description}</Description>
+              <CourseDuration>
+                Available duration:{' '}
+                <Quantity>{normalizedDuration(duration)}</Quantity>
+              </CourseDuration>
+              {containsLockedLessons ? (
+                <CourseDuration>
+                  Has locked lessons:{' '}
+                  <NotAvailableLessons>
+                    {normalizedDuration(lockedDuration(lessons))}
+                  </NotAvailableLessons>
+                </CourseDuration>
+              ) : (
+                <CourseDuration>All lessons are available</CourseDuration>
+              )}
+              <CourseDuration>
+                Rating: <Quantity>{rating}</Quantity>
+              </CourseDuration>
+            </Box>
+          </Wrapper>
 
-      <Box>
-        <Box mb={4}>
-          <Subtitle>Lesson {lessons[currentIndexVideo].order}</Subtitle>
-          <LessonTitle>{lessons[currentIndexVideo].title}</LessonTitle>
+          <Box>
+            <Box mb={4}>
+              <Subtitle>Lesson {lessons[currentIndexVideo].order}</Subtitle>
+              <LessonTitle>{lessons[currentIndexVideo].title}</LessonTitle>
 
-          <StatusText>
-            Status:{' '}
-            {lessons[currentIndexVideo].status === 'locked' ? (
-              <IconLock color="red" size="24px" />
-            ) : (
-              <IconUnlock color="green" size="24px" />
-            )}
-          </StatusText>
-        </Box>
+              <StatusText>
+                Status:{' '}
+                {lessons[currentIndexVideo].status === 'locked' ? (
+                  <IconLock color="red" size="24px" />
+                ) : (
+                  <IconUnlock color="green" size="24px" />
+                )}
+              </StatusText>
+            </Box>
 
-        <Box display="flex" justifyContent="center" alignItems="center">
-          <ButtonArrow onClick={() => prevLesson(lessons, currentIndexVideo)}>
-            {<FiArrowLeft size="32px" />}
-          </ButtonArrow>
-          <VideoWrapper>
-            <VideoJS
-              options={handleChangeLesson(lessons, currentIndexVideo)}
-              onReady={handlePlayerReady}
-            />
-          </VideoWrapper>
+            <Box display="flex" justifyContent="center" alignItems="center">
+              <ButtonArrow
+                onClick={() => prevLesson(lessons, currentIndexVideo)}
+              >
+                {<FiArrowLeft size="32px" />}
+              </ButtonArrow>
+              <VideoWrapper>
+                <VideoJS
+                  options={handleChangeLesson(lessons, currentIndexVideo)}
+                  onReady={handlePlayerReady}
+                />
+              </VideoWrapper>
 
-          <ButtonArrow onClick={() => nextLesson(lessons, currentIndexVideo)}>
-            {<FiArrowRight size="32px" />}
-          </ButtonArrow>
-        </Box>
-      </Box>
+              <ButtonArrow
+                onClick={() => nextLesson(lessons, currentIndexVideo)}
+              >
+                {<FiArrowRight size="32px" />}
+              </ButtonArrow>
+            </Box>
+          </Box>
+        </>
+      )}
     </Box>
   );
 };
