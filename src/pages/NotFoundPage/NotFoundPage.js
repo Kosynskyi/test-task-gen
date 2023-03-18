@@ -1,16 +1,23 @@
-import { Link } from 'react-router-dom';
 import { FcHome } from 'react-icons/fc';
+import { Box } from 'utils/Box';
+import { TextInfo, StyledBackHome } from './NotFoundPage.styled';
 
 const NotFoundPage = () => {
   return (
-    <>
-      <p>
+    <Box
+      display="flex"
+      flexDirection="row"
+      justifyContent="center"
+      alignItems="center"
+      height="100vh"
+    >
+      <TextInfo>
         Opps...something went wrong 🤷‍♀️, back to{' '}
-        <Link to="/">
+        <StyledBackHome to="/">
           <FcHome />
-        </Link>
-      </p>
-    </>
+        </StyledBackHome>
+      </TextInfo>
+    </Box>
   );
 };
 
