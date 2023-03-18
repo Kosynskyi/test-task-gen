@@ -12,7 +12,7 @@ const NotFoundPage = () => {
       height="100vh"
     >
       <TextInfo>
-        Opps...something went wrong 🤷‍♀️, back to{' '}
+        Opps...page not found 🤷‍♀️, back to{' '}
         <StyledBackHome to="/">
           <FcHome />
         </StyledBackHome>
