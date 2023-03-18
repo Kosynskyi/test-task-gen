@@ -43,14 +43,18 @@ const CourseList = ({ currentItems }) => {
                 <Subtext>
                   Rating: <Quantity>{rating}</Quantity>
                 </Subtext>
-                <Subtitle>Skills</Subtitle>
-                <SkillList>
-                  {meta?.skills?.map(item => (
-                    <SkillItem key={id + '_' + item}>
-                      <SkillItemText>{item}</SkillItemText>
-                    </SkillItem>
-                  ))}
-                </SkillList>
+                {meta?.skills?.length && (
+                  <>
+                    <Subtitle>Skills</Subtitle>
+                    <SkillList>
+                      {meta?.skills?.map(item => (
+                        <SkillItem key={id + '_' + item}>
+                          <SkillItemText>{item}</SkillItemText>
+                        </SkillItem>
+                      ))}
+                    </SkillList>
+                  </>
+                )}
               </StyledLink>
             </StyledCourseItem>
           )
