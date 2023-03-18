@@ -164,4 +164,5 @@ export const SkillItemText = styled.p`
 
 export const StyledLink = styled(Link)`
   text-decoration: none;
+  height: 100%;
 `;
