@@ -30,6 +30,8 @@ const CourseDetails = () => {
   const [currentIndexVideo, setCurrentIndexVideo] = useState(
     localStorage.getItem('currentIndexVideo') ?? 0
   );
+  const [savedVideo] = useState(currentIndexVideo);
+  const [savedTime] = useState(localStorage.getItem('savedTime') ?? 0);
 
   useEffect(() => {
     if (!data) return;
@@ -42,8 +44,24 @@ const CourseDetails = () => {
     poster.style.objectFit = 'cover';
   }
 
+  console.log('currentIndexVideo', currentIndexVideo);
   const handlePlayerReady = player => {
     playerRef.current = player;
+
+    window.addEventListener('beforeunload', () => {
+      localStorage.setItem('savedTime', player.cache_.currentTime);
+      // setSavedVideo(localStorage.getItem('currentIndexVideo'));
+      localStorage.setItem('savedVideo', currentIndexVideo);
+      console.log('currentIndexVideo', currentIndexVideo);
+      //
+      // onLoad();
+      console.log(777);
+    });
+
+    if (currentIndexVideo === savedVideo) {
+      console.log(999999);
+      player.currentTime(savedTime);
+    }
 
     // You can handle player events here, for example:
     player.on('waiting', e => {
