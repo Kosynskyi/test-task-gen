@@ -1,5 +1,6 @@
 import { useState, useEffect, lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import Skeleton from 'components/Skeleton';
 import BackToTop from 'components/BackToTop';
 import { getToken } from 'services/api';
@@ -30,6 +31,7 @@ function App() {
         </Routes>
       </Suspense>
       <BackToTop />
+      <ToastContainer />
     </>
   );
 }

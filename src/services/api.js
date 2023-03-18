@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { toast } from 'react-toastify';
 import { BASE_URL } from 'helpers/constants';
 
 export const getToken = async () => {
@@ -8,6 +9,15 @@ export const getToken = async () => {
     );
     return data.token;
   } catch (error) {
-    console.log(error.message);
+    toast.error(error.message, {
+      position: 'bottom-right',
+      autoClose: 4000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'colored',
+    });
   }
 };

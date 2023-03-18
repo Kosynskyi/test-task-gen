@@ -50,28 +50,23 @@ const CourseDetails = () => {
 
     window.addEventListener('beforeunload', () => {
       localStorage.setItem('savedTime', player.cache_.currentTime);
-      // setSavedVideo(localStorage.getItem('currentIndexVideo'));
       localStorage.setItem('savedVideo', currentIndexVideo);
       console.log('currentIndexVideo', currentIndexVideo);
-      //
-      // onLoad();
-      console.log(777);
     });
 
     if (currentIndexVideo === savedVideo) {
-      console.log(999999);
       player.currentTime(savedTime);
     }
 
-    // You can handle player events here, for example:
-    player.on('waiting', e => {
-      // videojs.log('player is waiting');
-      console.log(e);
-    });
+    // // You can handle player events here, for example:
+    // player.on('waiting', e => {
+    //   // videojs.log('player is waiting');
+    //   console.log(e);
+    // });
 
-    player.on('dispose', () => {
-      // videojs.log('player will dispose');
-    });
+    // player.on('dispose', () => {
+    //   // videojs.log('player will dispose');
+    // });
   };
 
   if (!data) return;
