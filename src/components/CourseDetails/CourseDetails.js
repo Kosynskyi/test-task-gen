@@ -44,29 +44,17 @@ const CourseDetails = () => {
     poster.style.objectFit = 'cover';
   }
 
-  console.log('currentIndexVideo', currentIndexVideo);
   const handlePlayerReady = player => {
     playerRef.current = player;
 
     window.addEventListener('beforeunload', () => {
       localStorage.setItem('savedTime', player.cache_.currentTime);
       localStorage.setItem('savedVideo', currentIndexVideo);
-      console.log('currentIndexVideo', currentIndexVideo);
     });
 
     if (currentIndexVideo === savedVideo) {
       player.currentTime(savedTime);
     }
-
-    // // You can handle player events here, for example:
-    // player.on('waiting', e => {
-    //   // videojs.log('player is waiting');
-    //   console.log(e);
-    // });
-
-    // player.on('dispose', () => {
-    //   // videojs.log('player will dispose');
-    // });
   };
 
   if (!data) return;

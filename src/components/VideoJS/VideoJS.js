@@ -7,6 +7,11 @@ export const VideoJS = props => {
   const playerRef = useRef(null);
   const { options, onReady } = props;
 
+  videojs.addLanguage('en', {
+    'The media could not be loaded, either because the server or network failed or because the format is not supported.':
+      'THIS IS MY CUSTOM MESSAGE 😎: This lesson is LOCKED, if you want to get the full access to all our lessons, purchase our subscription: "PRO" or "VIP"',
+  });
+
   useEffect(() => {
     if (!playerRef.current) {
       const videoElement = document.createElement('video-js');
@@ -19,7 +24,6 @@ export const VideoJS = props => {
       }));
     } else {
       const player = playerRef.current;
-
       player.autoplay(options.autoplay);
       player.src(options.sources);
     }
@@ -27,6 +31,7 @@ export const VideoJS = props => {
 
   useEffect(() => {
     const player = playerRef.current;
+
     return () => {
       if (player && !player.isDisposed()) {
         player.dispose();
