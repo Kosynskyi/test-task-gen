@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunktest_task_gen=self.webpackChunktest_task_gen||[]).push([[960],{8960:function(n,t,e){e.r(t),e.d(t,{default:function(){return u}});var s=e(1087),r=e(3728),c=e(184),u=function(){return(0,c.jsx)(c.Fragment,{children:(0,c.jsxs)("p",{children:["Opps...something went wrong \ud83e\udd37\u200d\u2640\ufe0f, back to"," ",(0,c.jsx)(s.rU,{to:"/",children:(0,c.jsx)(r.qHm,{})})]})})}}}]);
+//# sourceMappingURL=960.38bde94c.chunk.js.map
